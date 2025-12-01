@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCartStore } from '@/lib/store';
 import { toast } from 'sonner';
+import { FadeIn, StaggerContainer, StaggerItem } from '@/components/shared/Motion';
 
 export default function HomePage() {
   const featuredProducts = products.slice(0, 3);
@@ -25,18 +26,26 @@ export default function HomePage() {
       <section className="relative h-[80vh] w-full bg-gray-100 overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
              <div className="container px-4 md:px-6 flex flex-col items-start justify-center h-full z-10">
-               <span className="inline-block px-3 py-1 mb-4 text-xs font-medium tracking-wider uppercase bg-white border border-gray-200">
-                 New Collection
-               </span>
-               <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 max-w-2xl">
-                 The Essence of <br /> Pure Beauty
-               </h1>
-               <p className="text-lg text-gray-600 mb-8 max-w-lg">
-                 Discover our curated collection of premium fragrances and Korean skincare designed to reveal your inner radiance.
-               </p>
-               <Button asChild size="lg" className="rounded-none bg-black text-white hover:bg-gray-800 px-8">
-                 <Link href="/sample/a/shop">Shop Now</Link>
-               </Button>
+               <FadeIn delay={0.1}>
+                 <span className="inline-block px-3 py-1 mb-4 text-xs font-medium tracking-wider uppercase bg-white border border-gray-200">
+                   New Collection
+                 </span>
+               </FadeIn>
+               <FadeIn delay={0.3}>
+                 <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 max-w-2xl">
+                   The Essence of <br /> Pure Beauty
+                 </h1>
+               </FadeIn>
+               <FadeIn delay={0.5}>
+                 <p className="text-lg text-gray-600 mb-8 max-w-lg">
+                   Discover our curated collection of premium fragrances and Korean skincare designed to reveal your inner radiance.
+                 </p>
+               </FadeIn>
+               <FadeIn delay={0.7}>
+                 <Button asChild size="lg" className="rounded-none bg-black text-white hover:bg-gray-800 px-8 transition-transform active:scale-95">
+                   <Link href="/sample/a/shop">Shop Now</Link>
+                 </Button>
+               </FadeIn>
              </div>
         </div>
         <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gray-200 hidden md:block">
@@ -60,30 +69,32 @@ export default function HomePage() {
             Our most loved products this season.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {featuredProducts.map((product) => (
-            <Link href={`/sample/a/product/${product.id}`} key={product.id} className="group">
-              <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden mb-4">
-                <Image 
-                  src={product.image} 
-                  alt={product.name} 
-                  fill 
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <Button 
-                    className="w-full bg-white text-black hover:bg-black hover:text-white shadow-md rounded-none"
-                    onClick={(e) => handleAddToCart(e, product)}
-                  >
-                    Add to Cart
-                  </Button>
+            <StaggerItem key={product.id}>
+              <Link href={`/sample/a/product/${product.id}`} className="group block">
+                <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden mb-4">
+                  <Image 
+                    src={product.image} 
+                    alt={product.name} 
+                    fill 
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <Button 
+                      className="w-full bg-white text-black hover:bg-black hover:text-white shadow-md rounded-none transition-all active:scale-95"
+                      onClick={(e) => handleAddToCart(e, product)}
+                    >
+                      Add to Cart
+                    </Button>
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-lg font-medium">{product.name}</h3>
-              <p className="text-gray-500">{product.price.toLocaleString()} ETB</p>
-            </Link>
+                <h3 className="text-lg font-medium">{product.name}</h3>
+                <p className="text-gray-500">{product.price.toLocaleString()} ETB</p>
+              </Link>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
         <div className="flex justify-center mt-12">
           <Button asChild variant="outline" className="rounded-none border-black hover:bg-black hover:text-white px-8">
             <Link href="/sample/a/shop">View All Products</Link>
@@ -94,23 +105,23 @@ export default function HomePage() {
       {/* About / Brand Section */}
       <section className="bg-gray-50 py-20">
         <div className="container px-4 md:px-6 mx-auto flex flex-col md:flex-row items-center gap-12">
-          <div className="flex-1 relative aspect-square w-full max-w-md bg-gray-200">
+          <FadeIn className="flex-1 relative aspect-square w-full max-w-md bg-gray-200" delay={0.2}>
              <Image 
                src="https://images.unsplash.com/photo-1523293188086-b43266753080?q=100&w=2400&auto=format&fit=crop"
                alt="Brand philosophy"
                fill
                className="object-cover"
              />
-          </div>
-          <div className="flex-1 space-y-6">
+          </FadeIn>
+          <FadeIn className="flex-1 space-y-6" delay={0.4}>
             <h2 className="text-3xl font-bold tracking-tight">Authentic & Premium</h2>
             <p className="text-gray-600 leading-relaxed">
               At Crystal's Collection, we believe in the power of authenticity. Our perfumes are carefully selected for their unique character, and our Korean skincare range represents the pinnacle of beauty innovation.
             </p>
-            <Button asChild variant="link" className="p-0 h-auto text-black underline-offset-4">
+            <Button asChild variant="link" className="p-0 h-auto text-black underline-offset-4 hover:text-gray-600 transition-colors">
               <Link href="/sample/a/about">Read Our Story</Link>
             </Button>
-          </div>
+          </FadeIn>
         </div>
       </section>
     </div>
