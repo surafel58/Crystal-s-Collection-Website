@@ -107,7 +107,7 @@ export default function HomePage() {
         <div className="container px-4 md:px-6 mx-auto flex flex-col md:flex-row items-center gap-12">
           <FadeIn className="flex-1 relative aspect-square w-full max-w-md bg-gray-200" delay={0.2}>
              <Image 
-               src="https://images.unsplash.com/photo-1523293188086-b43266753080?q=100&w=2400&auto=format&fit=crop"
+               src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=1000&q=80"
                alt="Brand philosophy"
                fill
                className="object-cover"
